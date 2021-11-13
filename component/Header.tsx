@@ -1,25 +1,32 @@
-import styled from "@emotion/styled";
 import * as React from "react";
 import Image from "next/image";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { Link } from "react-router-dom";
+import { fixed, header } from "./styles/Header";
 
 interface IHeaderProps {
   className?: string;
+  fixed?: true;
 }
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   return (
-    <header className={props.className}>
+    <header css={css`
+      ${header}
+      ${props.fixed ? fixed : ''}
+    `}>
       <div className="container">
         <div className="wrapper-header">
           <figure>
-            <Image
-              src={"/logo.svg"}
-              alt="logo"
-              width={139}
-              height={68}
-            ></Image>
+            <Link to={'/'}>
+              <Image
+                src={"/logo.svg"}
+                alt="logo"
+                width={119}
+                height={48}
+              ></Image>
+            </Link>
           </figure>
           <button className="button-search">
             <Image
@@ -35,24 +42,4 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   );
 };
 
-const StyleHeader = styled(Header)`
-  padding: 0.5rem 0;
-  width: 100%;
-  & div.wrapper-header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  & button.button-search{
-    border: 0;
-    outline: none;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-  }
-`
-
-export default StyleHeader;
+export default Header;
