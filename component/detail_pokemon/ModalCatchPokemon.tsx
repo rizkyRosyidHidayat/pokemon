@@ -4,7 +4,7 @@ import Image from "next/image"
 import { bounce } from 'component/styles/detail_pokemon/ModalCatchPokemon';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { catchingPokemon } from 'function/catch_pokemon';
+import { catchingPokemon } from 'function/pokemon';
 import Success from './modal_catch_pokemon/Success';
 import { useAppSelector } from 'store/hooks';
 import { pokemonSelector } from 'store/pokemon';

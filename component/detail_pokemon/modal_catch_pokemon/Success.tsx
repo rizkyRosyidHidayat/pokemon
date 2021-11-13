@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { pokemonSelector, setModalCatchPokemon } from "store/pokemon";
 import Button from "component/Button";
 import { succes } from "component/styles/detail_pokemon/modal_catch_pokemon/Success";
-import { savePokemon } from "function/catch_pokemon";
+import { savePokemon } from "function/pokemon";
 import { useNavigate } from "react-router-dom";
 
 interface ISuccessProps { }
