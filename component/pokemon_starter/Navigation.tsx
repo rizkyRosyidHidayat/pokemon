@@ -40,6 +40,7 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
 const StyleNavigation = styled(Navigation)`
   padding: 1rem 0;
   width: 100%;
+  margin-top: 2rem;
 
   & div.wrapper-nav{
     display: flex;
@@ -56,7 +57,7 @@ const StyleNavigation = styled(Navigation)`
       height: 0.5rem;
       display: inline-block;
       border-radius: 10rem;
-      background-color: #0e0e0e;
+      background-color: #fff;
     }
     & span.active {
       width: 2rem;

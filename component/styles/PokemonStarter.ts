@@ -1,9 +1,11 @@
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+export const pokemonStarter = `
+  width: 100%;
+  min-height: 100vh;
+`
 
-export const cardPokemon = css`
+export const cardPokemon =`
   background-color: #fefefe;
-  padding: 1.5rem 2rem;
+  padding: 2rem 1.5rem 3.25rem 1.5rem;
   border-radius: 1.5rem;
   min-height: 15rem;
   display: flex;
@@ -11,7 +13,7 @@ export const cardPokemon = css`
   justify-content: flex-end;
   width: 100%;
 `
-export const labelOwned = css`
+export const labelOwned =`
   padding: 0.5rem 1rem;
   border-radius: 2rem;
   background-color: #dedede;
@@ -21,18 +23,18 @@ export const labelOwned = css`
   max-width: max-content;
   margin-bottom: .5rem;
 `;
-export const wrapperImage = css`
+export const wrapperImage =`
   width: 90%;
   position: relative;
-  height: 20rem;
-  margin: 0 auto -5rem auto;
+  height: 17rem;
+  margin: 2rem auto -3rem auto;
 `;
-export const namePokemon = css`
+export const namePokemon =`
   font-size: 3rem;
   margin-bottom: 0.25rem;
   text-transform: capitalize;
 `;
-export const typePokemon = css`
+export const typePokemon =`
   font-size: 1.5rem;
   font-weight: 300;  
   text-transform: capitalize;

@@ -7,36 +7,43 @@ import {
   cardPokemon,
   labelOwned,
   namePokemon,
+  pokemonStarter,
   typePokemon,
   wrapperImage,
 } from "./styles/PokemonStarter";
 import Header from "./Header"
 import Navigation from "./pokemon_starter/Navigation"
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getPokemonStarter, pokemonSelector } from "store/pokemon";
+import { getPokemonColor, getPokemonStarter, pokemonSelector } from "store/pokemon";
 import { ListPokemonStarterData } from "store/pokemon/initial-value";
 import { Link } from "react-router-dom";
 import Loader from "./Loader"
+import Button from "./Button";
 
-interface IListPokemonStarterProps {
+interface IPokemonStarterProps {
   className?: string;
 }
 
-const ListPokemonStarter: React.FunctionComponent<IListPokemonStarterProps> = (
+const PokemonStarter: React.FunctionComponent<IPokemonStarterProps> = (
   props
 ) => {
   const dispatch = useAppDispatch()
   const selector = useAppSelector(pokemonSelector)
   const detail_pokemon = selector.starter.data
-  const pokemon = ListPokemonStarterData[0].name
+  const color = selector.color
+  const pokemon = ListPokemonStarterData[2].name
 
   React.useEffect(() => {
     dispatch(getPokemonStarter(pokemon))
+    dispatch(getPokemonColor(pokemon))
   }, [dispatch, pokemon])
 
   return (
     <Loader pending={selector.starter.pending}>
-      <section className={props.className}>
+      <section css={css`
+        background-color: ${color};
+        ${pokemonStarter}
+      `}>
         <Header></Header>
         <main
           css={css`
@@ -45,7 +52,7 @@ const ListPokemonStarter: React.FunctionComponent<IListPokemonStarterProps> = (
         >
           <div className="container">
             {/* image */}
-            <div css={wrapperImage}>
+            <div css={css`${wrapperImage}`}>
               <Image
                 src={detail_pokemon.sprite}
                 alt={`pokemon ${detail_pokemon.name}`}
@@ -55,36 +62,29 @@ const ListPokemonStarter: React.FunctionComponent<IListPokemonStarterProps> = (
               ></Image>
             </div>
             {/* detail */}
-            <div className="wrapper-card">
-              <div css={cardPokemon}>
-                {/* owned */}
-                <div css={labelOwned}>Owned: 0</div>
-                {/* name */}
-                <h1 css={namePokemon}>
-                  {detail_pokemon.name}
-                </h1>
-                {/* type */}
-                <ul css={css`display: flex;gap: 1rem;flex-wrap: wrap;`}>
-                  {
-                    detail_pokemon.type.map(type => (
-                      <li key={type.name} css={typePokemon}>
-                        {type.name}
-                      </li>
-                    ))
-                  }
-                </ul>
-              </div>
-              {/* button next */}
-              <div css={css`margin-left: -26px;`}>
-                <Link to={`/detail/${detail_pokemon.name}`}>
-                  <Image
-                    src={"/icons/button-next.svg"}
-                    alt="pokemon image"
-                    height={52}
-                    width={52}
-                  ></Image>
-                </Link>
-              </div>
+            <div css={css`${cardPokemon}`}>
+              {/* owned */}
+              <div css={css`${labelOwned}`}>Owned: 0</div>
+              {/* name */}
+              <h1 css={css`${namePokemon}`}>
+                {detail_pokemon.name}
+              </h1>
+              {/* type */}
+              <ul css={css`display: flex;gap: 1rem;flex-wrap: wrap;`}>
+                {
+                  detail_pokemon.type.map(type => (
+                    <li key={type.name} css={css`${typePokemon}`}>
+                      {type.name}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+            {/* button next */}
+            <div css={css`padding: 0 1.5rem;margin-top: -2rem;`}>
+              <Link to={`/detail/${detail_pokemon.name}`}>
+                <Button text="MORE DETAIL"></Button>
+              </Link>
             </div>
           </div>
         </main>
@@ -94,20 +94,4 @@ const ListPokemonStarter: React.FunctionComponent<IListPokemonStarterProps> = (
   );
 };
 
-const StyleListPokemonStarter = styled(ListPokemonStarter)`
-  background-color: #fefefe;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
-  background: rgb(194,114,17);
-  background: linear-gradient(180deg, rgba(194,114,17,1) 14%, rgba(223,169,48,1) 46%, rgba(250,212,129,1) 72%, rgba(255,246,182,1) 100%);
-
-  & div.wrapper-card{
-    display: flex;
-    align-items: center;
-  }
-`;
-
-export default StyleListPokemonStarter;
+export default PokemonStarter;
