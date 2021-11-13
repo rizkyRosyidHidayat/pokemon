@@ -25,7 +25,7 @@ const LabelOwned: React.FunctionComponent<ILabelOwnedProps> = (props) => {
         .length
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [props.name])
 
   return (
     <div css={css`
