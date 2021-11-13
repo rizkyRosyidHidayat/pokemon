@@ -5,7 +5,6 @@ import Image from "next/image";
 import { css } from "@emotion/react";
 import {
   cardPokemon,
-  labelOwned,
   namePokemon,
   pokemonStarter,
   typePokemon,
@@ -19,6 +18,7 @@ import { ListPokemonStarterData } from "store/pokemon/initial-value";
 import { Link } from "react-router-dom";
 import Loader from "./Loader"
 import Button from "./Button";
+import LabelOwned from "./LabelOwned";
 
 interface IPokemonStarterProps {
   className?: string;
@@ -31,7 +31,7 @@ const PokemonStarter: React.FunctionComponent<IPokemonStarterProps> = (
   const selector = useAppSelector(pokemonSelector)
   const detail_pokemon = selector.starter.data
   const color = selector.color
-  const pokemon = ListPokemonStarterData[2].name
+  const pokemon = ListPokemonStarterData[0].name
 
   React.useEffect(() => {
     dispatch(getPokemonStarter(pokemon))
@@ -64,7 +64,7 @@ const PokemonStarter: React.FunctionComponent<IPokemonStarterProps> = (
             {/* detail */}
             <div css={css`${cardPokemon}`}>
               {/* owned */}
-              <div css={css`${labelOwned}`}>Owned: 0</div>
+              <LabelOwned name={detail_pokemon.name}></LabelOwned>
               {/* name */}
               <h1 css={css`${namePokemon}`}>
                 {detail_pokemon.name}

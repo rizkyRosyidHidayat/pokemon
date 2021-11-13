@@ -5,7 +5,6 @@ import Header from "./Header";
 import {
   cardPokemon,
   detailPokemon,
-  labelOwned,
   namePokemon,
   typePokemon,
   wrapperImage,
@@ -22,6 +21,7 @@ import { useParams } from "react-router-dom";
 import Loader from "./Loader";
 import ModalCatchPokemon from "./detail_pokemon/ModalCatchPokemon";
 import Button from "./Button";
+import LabelOwned from "./LabelOwned";
 
 interface IDetailPokemonProps {
   className?: string;
@@ -86,13 +86,7 @@ const DetailPokemon: React.FunctionComponent<IDetailPokemonProps> = (props) => {
           >
             <div className="wrapper-card">
               {/* owned */}
-              <div
-                css={css`
-                  ${labelOwned}
-                `}
-              >
-                Owned: 0
-              </div>
+              <LabelOwned name={detail_pokemon.name}></LabelOwned>
               {/* name */}
               <h1
                 css={css`

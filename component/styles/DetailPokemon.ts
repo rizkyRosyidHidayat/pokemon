@@ -25,16 +25,6 @@ export const cardPokemon = `
   border-radius: 2.5rem 2.5rem 0 0;
   width: 100%;
 `
-export const labelOwned = `
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  background-color: #dedede;
-  display: inline-block;
-  font-weight: 700;
-  font-size: 0.75rem;
-  max-width: max-content;
-  margin-bottom: .5rem;
-`;
 export const wrapperImage = `
   width: 90%;
   position: relative;

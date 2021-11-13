@@ -1,3 +1,5 @@
+import { MyPokemonProps } from "type/pokemon";
+
 export function catchingPokemon(): boolean {
   let res = false;
   const opportunity = Math.round(Math.random() * 1);
@@ -9,19 +11,7 @@ export function catchingPokemon(): boolean {
   return res;
 }
 
-type PokemonProps = {
-  nickname: string;
-  name: string;
-  type: Array<{
-    name: string;
-    url: string;
-  }>;
-  sprite: string;
-  moves: Array<string>;
-  color: string;
-};
-
-export function savePokemon(pokemon: PokemonProps): boolean {
+export function savePokemon(pokemon: MyPokemonProps): boolean {
   let res = false;
   const list_pocket = localStorage.getItem("list_pocket");
 
@@ -29,7 +19,7 @@ export function savePokemon(pokemon: PokemonProps): boolean {
     localStorage.setItem("list_pocket", JSON.stringify([pokemon]));
     res = true;
   } else {
-    const list_pokemon: Array<PokemonProps> = JSON.parse(list_pocket);
+    const list_pokemon: Array<MyPokemonProps> = JSON.parse(list_pocket);
     const checkPokemonAndNickname: number = list_pokemon.findIndex(
       (list) => list.name !== pokemon.name && list.nickname !== pokemon.nickname
     );
