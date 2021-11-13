@@ -14,7 +14,7 @@ interface IHeaderProps {
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   return (
     <header css={css`
-      background-color: ${props.color === undefined ? '#f2f2f2' : props.color};
+      background-color: ${props.color === undefined ? 'transparent' : props.color};
       ${header}
       ${props.fixed ? fixed : ''}
     `}>
