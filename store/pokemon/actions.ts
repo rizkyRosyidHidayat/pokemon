@@ -54,3 +54,4 @@ export const getPokemonColor = createAsyncThunk(
 );
 
 export const setModalCatchPokemon = createAction<boolean>('setModalCatchPokemon')
+export const setModalReleasePokemon = createAction<boolean>('setModalReleasePokemon')
