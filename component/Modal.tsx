@@ -11,7 +11,7 @@ interface IModalProps {
 const Modal: React.FunctionComponent<IModalProps> = (props) => {
   return (
     <div css={css`
-      display: ${props.modal ? 'flex' : 'hidden'};
+      display: ${props.modal ? 'flex' : 'none'};
       ${screen}
     `}>
       {props.children}
