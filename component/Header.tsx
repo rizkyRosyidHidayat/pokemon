@@ -52,11 +52,12 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
               alt="logo"
               width={32}
               height={32}
+              onClick={() => navigate('/pocket')}
             ></Image>
           </div>
           <button className={`button-search ${props.dark ? '':'active'}`}>
             <Image
-              src={`/icons/magnify.svg`}
+              src={`/icons/${props.dark ? 'magnify.svg' : 'magnify-white.svg'}`}
               alt=""
               width={24}
               height={24}
