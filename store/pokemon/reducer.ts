@@ -5,7 +5,7 @@ import { DetailPokemon, DetailPokemonProps, DetailPokemonStarter, DetailPokemonS
 
 type PokemonProps = {
   starter: {
-    data: DetailPokemonStarterProps,
+    data: Array<DetailPokemonStarterProps>,
     pending: boolean,
     error: boolean
   },
@@ -21,7 +21,7 @@ type PokemonProps = {
 
 const initialState: PokemonProps = {
   starter: {
-    data: DetailPokemonStarter,
+    data: [DetailPokemonStarter],
     pending: true,
     error: false
   },

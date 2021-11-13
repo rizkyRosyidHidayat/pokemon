@@ -27,16 +27,20 @@ interface IPokemonStarterProps {
 const PokemonStarter: React.FunctionComponent<IPokemonStarterProps> = (
   props
 ) => {
+  const [page, setPage] = React.useState<number>(0)
   const dispatch = useAppDispatch()
   const selector = useAppSelector(pokemonSelector)
-  const detail_pokemon = selector.starter.data
+  const detail_pokemon = selector.starter.data[page]
   const color = selector.color
-  const pokemon = ListPokemonStarterData[0].name
+  const pokemon = ListPokemonStarterData[page].name
 
   React.useEffect(() => {
-    dispatch(getPokemonStarter(pokemon))
-    dispatch(getPokemonColor(pokemon))
-  }, [dispatch, pokemon])
+    if (detail_pokemon.name === '') {
+      dispatch(getPokemonStarter())
+    } else if (detail_pokemon.name !== '') {
+      dispatch(getPokemonColor(pokemon))
+    }
+  }, [dispatch, pokemon, detail_pokemon.name])
 
   return (
     <Loader pending={selector.starter.pending}>
@@ -88,7 +92,7 @@ const PokemonStarter: React.FunctionComponent<IPokemonStarterProps> = (
             </div>
           </div>
         </main>
-        <Navigation></Navigation>
+        <Navigation page={page} setPage={val => setPage(val)}></Navigation>
       </section>
     </Loader>
   );

@@ -1,35 +1,52 @@
-import styled from "@emotion/styled";
 import * as React from "react";
 import Image from "next/image";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { navigation } from "component/styles/pokemon_starter/Navigation";
+import { ListPokemonStarterData } from "store/pokemon/initial-value";
 
 interface INavigationProps {
-  className?: string;
+  page: number;
+  setPage: (val: number) => void;
 }
 
 const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
   return (
-    <nav className={props.className}>
+    <nav
+      css={css`
+        ${navigation}
+      `}
+    >
       <div className="container">
         <div className="wrapper-nav">
           <ul className="list-indicator">
-            <li><span className="active"></span></li>
-            <li><span></span></li>
-            <li><span></span></li>
-            <li><span></span></li>
+            {ListPokemonStarterData.map((pokemon, index) => (
+              <li key={pokemon.name}>
+                <span className={props.page === index ? 'active' : ''}></span>
+              </li>
+            ))}
           </ul>
           <Image
             src={"/icons/button-nav-left.svg"}
             alt="nav left"
             width={44}
             height={44}
+            onClick={() => {
+              if (props.page > 0) {
+                props.setPage(props.page-1)
+              }
+            }}
           ></Image>
           <Image
             src={"/icons/button-nav-right.svg"}
             alt="nav right"
             width={44}
             height={44}
+            onClick={() => {
+              if (props.page >= 0 || props.page < ListPokemonStarterData.length-1) {
+                props.setPage(props.page+1)
+              }
+            }}
           ></Image>
         </div>
       </div>
@@ -37,32 +54,4 @@ const Navigation: React.FunctionComponent<INavigationProps> = (props) => {
   );
 };
 
-const StyleNavigation = styled(Navigation)`
-  padding: 1rem 0;
-  width: 100%;
-  margin-top: 2rem;
-
-  & div.wrapper-nav{
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-  }
-
-  & ul.list-indicator{
-    margin-right: auto;
-    display: flex;
-    gap: 0.5rem;
-    span {
-      width: 0.5rem;
-      height: 0.5rem;
-      display: inline-block;
-      border-radius: 10rem;
-      background-color: #fff;
-    }
-    & span.active {
-      width: 2rem;
-    }
-  }
-`
-
-export default StyleNavigation;
+export default Navigation;

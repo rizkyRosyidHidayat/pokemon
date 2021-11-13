@@ -1,23 +1,32 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import http from "config/config";
 import { PokemonClient } from "pokenode-ts";
-import { DetailPokemonProps, DetailPokemonStarterProps } from "./initial-value";
+import {
+  DetailPokemonProps,
+  DetailPokemonStarterProps,
+  ListPokemonStarterData,
+} from "./initial-value";
+import axios from "axios";
 
 export const getPokemonStarter = createAsyncThunk(
   "getPokemonStarter",
-  async (name: string) => {
+  async () => {
     const api = new PokemonClient();
 
-    return await api
-      .getPokemonByName(name)
-      .then(
-        (res): DetailPokemonStarterProps => ({
-          name: res.name,
-          type: res.types.map((type) => type.type).map((type) => type),
-          sprite: res.sprites.other.dream_world.front_default,
-        })
-      )
-      .catch((error) => console.error(error));
+    const list_pokemon_starter = ListPokemonStarterData.map((pokemon) =>
+      api.getPokemonByName(pokemon.name)
+    );
+
+    return  await axios.all(list_pokemon_starter).then(
+      axios.spread((...res): Array<DetailPokemonStarterProps> => {
+        return ListPokemonStarterData.map((list, index) => ({
+          name: res[index].name,
+          type: res[index].types.map((type) => type.type).map((type) => type),
+          sprite: res[index].sprites.other.dream_world.front_default,
+        }))
+      })
+    )
+    .catch((error) => console.error(error));
   }
 );
 
@@ -43,15 +52,20 @@ export const getPokemonDetail = createAsyncThunk(
 export const getPokemonColor = createAsyncThunk(
   "getPokemonColor",
   async (name: string) => {
-    return await http.get('pokemon-species/' + name)
-      .then((res):string | undefined => {
+    return await http
+      .get("pokemon-species/" + name)
+      .then((res): string | undefined => {
         if (res.status === 200) {
-          return res.data.color.name
+          return res.data.color.name;
         }
       })
-      .catch(error => console.error(error))
+      .catch((error) => console.error(error));
   }
 );
 
-export const setModalCatchPokemon = createAction<boolean>('setModalCatchPokemon')
-export const setModalReleasePokemon = createAction<boolean>('setModalReleasePokemon')
+export const setModalCatchPokemon = createAction<boolean>(
+  "setModalCatchPokemon"
+);
+export const setModalReleasePokemon = createAction<boolean>(
+  "setModalReleasePokemon"
+);
