@@ -66,6 +66,9 @@ const MyPokemonList: React.FunctionComponent<IMyPokemonListProps> = (props) => {
               </div>
             ) : (
               <ul>
+                <li>
+                  <p className="title">My Pokemon List</p>
+                </li>
                 {my_list.map((pokemon, index) => (
                   <li key={index.toString()}>
                     <div className="card">

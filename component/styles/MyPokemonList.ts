@@ -3,6 +3,12 @@ export const pokemonList = `
   padding-top: 5rem;
   min-height: 100vh;
 
+  & p.title{
+    font-size: 2rem;
+    font-weight: 900;
+    color: #282828;
+  }
+
   & p.message-empty{
     font-size: 4rem;
     color: #c3c0c0;
@@ -10,7 +16,7 @@ export const pokemonList = `
   }
 
   ul{
-    margin-top: -1rem;
+    margin-top: -4rem;
     margin-bottom: 3rem;
   }
 
