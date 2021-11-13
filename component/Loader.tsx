@@ -1,5 +1,7 @@
-import styled from '@emotion/styled';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import * as React from 'react';
+import { loader } from './styles/Loader';
 
 interface ILoaderProps {
   className?: string;
@@ -9,25 +11,16 @@ interface ILoaderProps {
 
 const Loader: React.FunctionComponent<ILoaderProps> = (props) => {
   return (
-    <div className={props.className}>
+    <div>
       {
         props.pending
-          ? 'Loading'
+          ? <div css={css`${loader}`}>
+            Loading
+          </div>
           : props.children
       }
     </div>
   );
 };
 
-const StyleLoader = styled(Loader)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  widht: 100%;
-  height: 100vh;
-  background-color: #fff;
-  position: relative;
-  z-index: 1000;
-`
-
-export default StyleLoader;
+export default Loader;
