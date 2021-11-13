@@ -9,12 +9,13 @@ import {
   namePokemon,
   typePokemon,
   wrapperImage,
-} from "./styles/ListPokemonStarter";
+} from "./styles/PokemonStarter";
 import Header from "./Header"
-import Navigation from "./list_pokemon_starter/Navigation"
+import Navigation from "./pokemon_starter/Navigation"
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { getPokemonStarter, pokemonSelector } from "store/pokemon";
 import { ListPokemonStarterData } from "store/pokemon/initial-value";
+import { Link } from "react-router-dom";
 import Loader from "./Loader"
 
 interface IListPokemonStarterProps {
@@ -26,7 +27,7 @@ const ListPokemonStarter: React.FunctionComponent<IListPokemonStarterProps> = (
 ) => {
   const dispatch = useAppDispatch()
   const selector = useAppSelector(pokemonSelector)
-  const detail_pokemon = selector.data.starter
+  const detail_pokemon = selector.starter.data
   const pokemon = ListPokemonStarterData[0].name
 
   React.useEffect(() => {
@@ -34,7 +35,7 @@ const ListPokemonStarter: React.FunctionComponent<IListPokemonStarterProps> = (
   }, [dispatch, pokemon])
 
   return (
-    <Loader pending={selector.pending}>
+    <Loader pending={selector.starter.pending}>
       <section className={props.className}>
         <Header></Header>
         <main
@@ -50,6 +51,7 @@ const ListPokemonStarter: React.FunctionComponent<IListPokemonStarterProps> = (
                 alt={`pokemon ${detail_pokemon.name}`}
                 layout="fill"
                 objectFit="contain"
+                priority
               ></Image>
             </div>
             {/* detail */}
@@ -74,12 +76,14 @@ const ListPokemonStarter: React.FunctionComponent<IListPokemonStarterProps> = (
               </div>
               {/* button next */}
               <div css={css`margin-left: -26px;`}>
-                <Image
-                  src={"/icons/button-next.svg"}
-                  alt="pokemon image"
-                  height={52}
-                  width={52}
-                ></Image>
+                <Link to={`/detail/${detail_pokemon.name}`}>
+                  <Image
+                    src={"/icons/button-next.svg"}
+                    alt="pokemon image"
+                    height={52}
+                    width={52}
+                  ></Image>
+                </Link>
               </div>
             </div>
           </div>
