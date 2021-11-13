@@ -58,6 +58,7 @@ const Success: React.FunctionComponent<ISuccessProps> = (props) => {
               })
             ) {
               setResult(true)
+              dispatch(setModalCatchPokemon(false))
               navigate('/pocket')
             } else {
               setResult(false)
