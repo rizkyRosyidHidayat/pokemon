@@ -44,7 +44,7 @@ const PokemonStarter: React.FunctionComponent<IPokemonStarterProps> = (
         background-color: ${color};
         ${pokemonStarter}
       `}>
-        <Header></Header>
+        <Header dark></Header>
         <main
           css={css`
           width: 100%;

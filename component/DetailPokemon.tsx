@@ -61,7 +61,7 @@ const DetailPokemon: React.FunctionComponent<IDetailPokemonProps> = (props) => {
             ${detailPokemon}
           `}
         >
-          <Header color={color} fixed></Header>
+          <Header color={color} fixed dark back></Header>
           {/* image */}
           {/* image */}
           <div
