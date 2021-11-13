@@ -1,6 +1,6 @@
 export const succes = `
   width: 100%;
-  margin: 0 auto;
+  margin: -3rem auto 0 auto;
   padding: 0 1.5rem;
 
   & div.wrapper-img{
@@ -16,6 +16,14 @@ export const succes = `
     padding: 2.5rem 1.5rem 1rem 1.5rem;
     border-radius: 1.5rem;
     width: 100%;
+  }
+  & div.card{
+    background-color: #fefefe;
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
+    border-radius: 1.5rem;
+    width: 100%;
+    text-align: center;
+    margin-top: -2.5rem;
   }
 
   & form input.input-nickname{

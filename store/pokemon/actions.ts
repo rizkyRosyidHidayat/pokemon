@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import http from "config/config";
 import { PokemonClient } from "pokenode-ts";
 import { DetailPokemonProps, DetailPokemonStarterProps } from "./initial-value";
@@ -52,3 +52,5 @@ export const getPokemonColor = createAsyncThunk(
       .catch(error => console.error(error))
   }
 );
+
+export const setModalCatchPokemon = createAction<boolean>('setModalCatchPokemon')

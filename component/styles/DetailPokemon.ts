@@ -17,20 +17,6 @@ export const detailPokemon = `
     gap: 1rem;
     flex-wrap: wrap;
   }
-  & button.button-catch{
-    border: 0;
-    outline: none;
-    background-color: #b50c0c;
-    color: white;
-    font-weight: bold;
-    border-radius: 10rem;
-    padding: 1rem 2rem;
-    text-align: center;
-    font-size: 1.25rem;
-    letter-spacing: 1px;
-    margin-top: 2rem;
-    width: 100%;
-  }
 `
 
 export const cardPokemon = `

@@ -1,5 +1,5 @@
 export function catchingPokemon(): boolean {
-  let res = true;
+  let res = false;
   const opportunity = Math.round(Math.random() * 1);
 
   if (opportunity === 1) {

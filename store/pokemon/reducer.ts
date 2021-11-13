@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getPokemonColor, getPokemonDetail } from ".";
+import { getPokemonColor, getPokemonDetail, setModalCatchPokemon } from ".";
 import { getPokemonStarter } from "./actions";
 import { DetailPokemon, DetailPokemonProps, DetailPokemonStarter, DetailPokemonStarterProps } from "./initial-value";
 
@@ -15,6 +15,7 @@ type PokemonProps = {
     error: boolean
   },
   color: string;
+  modal_catch_pokemon: boolean
 }
 
 const initialState: PokemonProps = {
@@ -28,7 +29,8 @@ const initialState: PokemonProps = {
     pending: true,
     error: false
   },
-  color: 'white'
+  color: 'white',
+  modal_catch_pokemon: false
 }
 
 export const pokemonReducer = createReducer(initialState, builder => {
@@ -74,5 +76,11 @@ export const pokemonReducer = createReducer(initialState, builder => {
       } else {
         state.color = 'white'
       }
+    })
+    /**
+     * set modal catch pokemon
+     */
+     .addCase(setModalCatchPokemon, (state, { payload }) => {
+      state.modal_catch_pokemon = payload
     })
 })
