@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
-import ListPokemonStarter from 'component/ListPokemonStarter';
+import PokemonStarter from 'component/PokemonStarter';
+import DetailPokemon from 'component/DetailPokemon';
 
 const Home: NextPage = () => {
   return (
@@ -15,7 +16,8 @@ const Home: NextPage = () => {
       <main>
         <Router>
           <Routes>
-            <Route path="/" element={<ListPokemonStarter></ListPokemonStarter>}></Route>
+            <Route path="/" element={<PokemonStarter></PokemonStarter>}></Route>
+            <Route path="/detail/:name" element={<DetailPokemon></DetailPokemon>}></Route>
           </Routes>
         </Router>
       </main>

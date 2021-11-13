@@ -34,3 +34,23 @@ export const DetailPokemonStarter: DetailPokemonStarterProps = {
   }],
   sprite: '',
 }
+
+export interface DetailPokemonProps {
+  name: string,
+  type: Array<{
+    name: string,
+    url: string
+  }>,
+  sprite: string,
+  moves: Array<string>
+}
+
+export const DetailPokemon: DetailPokemonProps = {
+  name: '',
+  type: [{
+    name: '',
+    url: ''
+  }],
+  sprite: '',
+  moves: ['']
+}
