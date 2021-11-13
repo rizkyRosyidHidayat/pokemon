@@ -21,6 +21,7 @@ export const wrapperImage =`
   position: relative;
   height: 17rem;
   margin: 2rem auto -3rem auto;
+  position: relative;
 `;
 export const namePokemon =`
   font-size: 3rem;
