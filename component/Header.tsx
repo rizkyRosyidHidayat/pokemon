@@ -8,11 +8,13 @@ import { fixed, header } from "./styles/Header";
 interface IHeaderProps {
   className?: string;
   fixed?: true;
+  color?: string;
 }
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   return (
     <header css={css`
+      background-color: ${props.color === undefined ? '#f2f2f2' : props.color};
       ${header}
       ${props.fixed ? fixed : ''}
     `}>
