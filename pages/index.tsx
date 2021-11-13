@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import PokemonStarter from 'component/PokemonStarter';
 import DetailPokemon from 'component/DetailPokemon';
+import MyPokemonList from 'component/MyPokemonList';
 
 const Home: NextPage = () => {
   return (
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
           <Routes>
             <Route path="/" element={<PokemonStarter></PokemonStarter>}></Route>
             <Route path="/detail/:name" element={<DetailPokemon></DetailPokemon>}></Route>
+            <Route path="/pocket" element={<MyPokemonList></MyPokemonList>}></Route>
           </Routes>
         </Router>
       </main>
