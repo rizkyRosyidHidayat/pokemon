@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { ListPokemonProps } from "type/pokemon";
-import { getListPokemon, getPokemonColor, getPokemonDetail, setModalCatchPokemon, setModalReleasePokemon } from ".";
+import { getListPokemon, getMoreListPokemon, getPokemonColor, getPokemonDetail, setModalCatchPokemon, setModalReleasePokemon } from ".";
 import { getPokemonStarter } from "./actions";
 import { DetailPokemon, DetailPokemonProps, DetailPokemonStarter, DetailPokemonStarterProps } from "./initial-value";
 
@@ -17,6 +17,11 @@ type PokemonProps = {
   },
   list: {
     data: Array<ListPokemonProps>,
+    next: string,
+    pending: boolean,
+    error: boolean
+  },
+  more_list: {
     pending: boolean,
     error: boolean
   },
@@ -38,7 +43,12 @@ const initialState: PokemonProps = {
   },
   list: {
     data: [{url: '', name: ''}],
+    next: '',
     pending: true,
+    error: false
+  },
+  more_list: {
+    pending: false,
     error: false
   },
   color: 'white',
@@ -111,11 +121,29 @@ export const pokemonReducer = createReducer(initialState, builder => {
     .addCase(getListPokemon.fulfilled, (state, { payload }) => {
       state.list.pending = false
       if (payload !== undefined) {
-        state.list.data = payload
+        state.list.data = payload.results
+        state.list.next = payload.next
       }
     })
     .addCase(getListPokemon.rejected, state => {
       state.list.pending = false
       state.list.error = true
+    })
+    /**
+     * get more list pokemon
+     */
+    .addCase(getMoreListPokemon.pending, state => {
+      state.more_list.pending = true
+    })
+    .addCase(getMoreListPokemon.fulfilled, (state, { payload }) => {
+      state.more_list.pending = false
+      if (payload !== undefined) {
+        state.list.data = state.list.data.concat(payload.results)
+        state.list.next = payload.next
+      }
+    })
+    .addCase(getMoreListPokemon.rejected, state => {
+      state.more_list.pending = false
+      state.more_list.error = true
     })
 })

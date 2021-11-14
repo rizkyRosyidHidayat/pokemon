@@ -50,19 +50,54 @@ export const getPokemonDetail = createAsyncThunk(
   }
 );
 
+interface GetListPokemon {
+  results: Array<ListPokemonProps>,
+  next: string
+}
 export const getListPokemon = createAsyncThunk(
   "getListPokemon",
   async () => {
     return await http.get('pokemon?limit=20&offset=0')
       .then(
-        (res): Array<ListPokemonProps> => {
+        (res): GetListPokemon => {
           if (res.status === 200) {
-            return res.data.results
+            return {
+              results: res.data.results,
+              next: res.data.next
+            }
           } else {
-            return [{
-              name: '',
-              url: ''
-            }]
+            return {
+              results: [{
+                name: '',
+                url: ''
+              }],
+              next: ''
+            }
+          }
+        }
+      )
+      .catch((error) => console.error(error));
+  }
+);
+export const getMoreListPokemon = createAsyncThunk(
+  "getMoreListPokemon",
+  async (next: string) => {
+    return await http.get(next)
+      .then(
+        (res): GetListPokemon => {
+          if (res.status === 200) {
+            return {
+              results: res.data.results,
+              next: res.data.next
+            }
+          } else {
+            return {
+              results: [{
+                name: '',
+                url: ''
+              }],
+              next: ''
+            }
           }
         }
       )
