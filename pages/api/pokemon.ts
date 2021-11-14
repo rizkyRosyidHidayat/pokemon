@@ -14,7 +14,7 @@ export default async function handler(
 const api = new PokemonClient();
 
 await api
-  .listPokemonSpecies()
+  .listPokemons()
   .then((response) => res.status(200).json(response))
   .catch((error) => console.error(error));
 }

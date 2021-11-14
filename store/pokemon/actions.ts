@@ -1,12 +1,13 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import http from "config/config";
-import { PokemonClient } from "pokenode-ts";
+import { NamedAPIResource, NamedAPIResourceList, PokemonClient } from "pokenode-ts";
 import {
   DetailPokemonProps,
   DetailPokemonStarterProps,
   ListPokemonStarterData,
 } from "./initial-value";
 import axios from "axios";
+import { ListPokemonProps } from "type/pokemon";
 
 export const getPokemonStarter = createAsyncThunk(
   "getPokemonStarter",
@@ -44,6 +45,26 @@ export const getPokemonDetail = createAsyncThunk(
           sprite: res.sprites.other.dream_world.front_default,
           moves: res.moves.map((move) => move.move.name),
         })
+      )
+      .catch((error) => console.error(error));
+  }
+);
+
+export const getListPokemon = createAsyncThunk(
+  "getListPokemon",
+  async () => {
+    return await http.get('pokemon?limit=20&offset=0')
+      .then(
+        (res): Array<ListPokemonProps> => {
+          if (res.status === 200) {
+            return res.data.results
+          } else {
+            return [{
+              name: '',
+              url: ''
+            }]
+          }
+        }
       )
       .catch((error) => console.error(error));
   }

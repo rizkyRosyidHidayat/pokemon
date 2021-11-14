@@ -1,5 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getPokemonColor, getPokemonDetail, setModalCatchPokemon, setModalReleasePokemon } from ".";
+import { ListPokemonProps } from "type/pokemon";
+import { getListPokemon, getPokemonColor, getPokemonDetail, setModalCatchPokemon, setModalReleasePokemon } from ".";
 import { getPokemonStarter } from "./actions";
 import { DetailPokemon, DetailPokemonProps, DetailPokemonStarter, DetailPokemonStarterProps } from "./initial-value";
 
@@ -11,6 +12,11 @@ type PokemonProps = {
   },
   detail: {
     data: DetailPokemonProps,
+    pending: boolean,
+    error: boolean
+  },
+  list: {
+    data: Array<ListPokemonProps>,
     pending: boolean,
     error: boolean
   },
@@ -30,6 +36,11 @@ const initialState: PokemonProps = {
     pending: true,
     error: false
   },
+  list: {
+    data: [{url: '', name: ''}],
+    pending: true,
+    error: false
+  },
   color: 'white',
   modal_catch_pokemon: false,
   modal_release_pokemon: false
@@ -37,9 +48,9 @@ const initialState: PokemonProps = {
 
 export const pokemonReducer = createReducer(initialState, builder => {
   builder
-  /**
-   * get detail pokemon starter
-   */
+    /**
+     * get detail pokemon starter
+     */
     .addCase(getPokemonStarter.pending, state => {
       state.starter.pending = true
     })
@@ -72,7 +83,7 @@ export const pokemonReducer = createReducer(initialState, builder => {
     /**
      * get color pokemon
      */
-     .addCase(getPokemonColor.fulfilled, (state, { payload }) => {
+    .addCase(getPokemonColor.fulfilled, (state, { payload }) => {
       if (payload !== undefined) {
         state.color = payload
       } else {
@@ -82,13 +93,29 @@ export const pokemonReducer = createReducer(initialState, builder => {
     /**
      * set modal catch pokemon
      */
-     .addCase(setModalCatchPokemon, (state, { payload }) => {
+    .addCase(setModalCatchPokemon, (state, { payload }) => {
       state.modal_catch_pokemon = payload
     })
     /**
      * set modal release pokemon
      */
-     .addCase(setModalReleasePokemon, (state, { payload }) => {
+    .addCase(setModalReleasePokemon, (state, { payload }) => {
       state.modal_release_pokemon = payload
+    })
+    /**
+     * get list pokemon
+     */
+    .addCase(getListPokemon.pending, state => {
+      state.list.pending = true
+    })
+    .addCase(getListPokemon.fulfilled, (state, { payload }) => {
+      state.list.pending = false
+      if (payload !== undefined) {
+        state.list.data = payload
+      }
+    })
+    .addCase(getListPokemon.rejected, state => {
+      state.list.pending = false
+      state.list.error = true
     })
 })

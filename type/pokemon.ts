@@ -9,3 +9,8 @@ export interface  MyPokemonProps {
   moves: Array<string>;
   color: string;
 };
+
+export interface ListPokemonProps {
+  name: string
+  url: string
+}
