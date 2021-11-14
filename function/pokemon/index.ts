@@ -21,7 +21,9 @@ export function savePokemon(pokemon: MyPokemonProps): boolean {
   } else {
     const list_pokemon: Array<MyPokemonProps> = JSON.parse(list_pocket);
     const checkPokemonAndNickname: number = list_pokemon.findIndex(
-      (list) => list.name !== pokemon.name && list.nickname !== pokemon.nickname
+      (list) =>
+        list.name.toLowerCase() === pokemon.name.toLowerCase() &&
+        list.nickname.toLowerCase() === pokemon.nickname.toLowerCase()
     );
 
     if (checkPokemonAndNickname === -1) {
@@ -36,12 +38,13 @@ export function savePokemon(pokemon: MyPokemonProps): boolean {
 
 export function releasePokemon(pokemon: MyPokemonProps) {
   const data_local = localStorage.getItem("list_pocket");
-  
+
   if (data_local !== null) {
     const list_pocket: Array<MyPokemonProps> = JSON.parse(data_local);
     const new_list_pocket = list_pocket.filter(
-      (pocket) => pocket.name !== pokemon.name || pocket.nickname !== pokemon.nickname
+      (pocket) =>
+        pocket.name !== pokemon.name || pocket.nickname !== pokemon.nickname
     );
-    localStorage.setItem("list_pocket", JSON.stringify(new_list_pocket))
+    localStorage.setItem("list_pocket", JSON.stringify(new_list_pocket));
   }
 }
