@@ -4,7 +4,8 @@ import { css } from "@emotion/react";
 import { MyPokemonProps } from 'type/pokemon';
 
 interface ILabelOwnedProps {
-  name: string
+  name: string,
+  text?: true
 }
 
 const LabelOwned: React.FunctionComponent<ILabelOwnedProps> = (props) => {
@@ -27,16 +28,20 @@ const LabelOwned: React.FunctionComponent<ILabelOwnedProps> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.name])
 
+  const label = `
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    background-color: #dedede;
+    margin-bottom: .5rem;
+  `
+
   return (
     <div css={css`
-      padding: 0.5rem 1rem;
-      border-radius: 2rem;
-      background-color: #dedede;
       display: inline-block;
       font-weight: 700;
       font-size: 0.75rem;
       max-width: max-content;
-      margin-bottom: .5rem;
+      ${props.text ? '' : label}
     `}>Owned: {count}</div>
   );
 };
