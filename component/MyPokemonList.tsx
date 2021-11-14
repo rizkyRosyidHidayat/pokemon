@@ -6,7 +6,7 @@ import Loader from "./Loader";
 import Header from "./Header";
 import { MyPokemonProps } from "type/pokemon";
 import Button from "./Button";
-import { pokemonList } from "./styles/MyPokemonList";
+import { card, pokemonList } from "./styles/MyPokemonList";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { pokemonSelector, setModalReleasePokemon } from "store/pokemon";
 import ModalReleasePokemon from "./my_pokemon_list/ModalReleasePokemon";
@@ -71,7 +71,10 @@ const MyPokemonList: React.FunctionComponent<IMyPokemonListProps> = (props) => {
                 </li>
                 {my_list.map((pokemon, index) => (
                   <li key={index.toString()}>
-                    <div className="card">
+                    <div css={css`
+                      background-color: ${pokemon.color};
+                      ${card}
+                    `}>
                       <div
                         css={css`
                           margin-top: 1rem;

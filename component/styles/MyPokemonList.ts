@@ -24,15 +24,6 @@ export const pokemonList = `
     margin-top: 3.5rem;
   }
 
-  & div.card{
-    background-color: red;
-    border-radius: 1rem;
-    display: flex;
-    justify-content: space-between;
-    padding: 0rem 1.5rem 1rem 1.5rem;
-    color: #fff;
-  }
-
   & div.wrapper-img{
     flex-shrink: 0;
     margin-top: -2rem;
@@ -49,4 +40,12 @@ export const pokemonList = `
     margin-top: 1rem;
     margin-bottom: -2rem;
   }
+`
+
+export const card = `
+  border-radius: 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0rem 1.5rem 1rem 1.5rem;
+  color: #fff;
 `
