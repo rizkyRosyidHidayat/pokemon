@@ -10,6 +10,7 @@ import { card, pokemonList } from "./styles/MyPokemonList";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { pokemonSelector, setModalReleasePokemon } from "store/pokemon";
 import ModalReleasePokemon from "./my_pokemon_list/ModalReleasePokemon";
+import { Link } from "react-router-dom";
 
 interface IMyPokemonListProps { }
 
@@ -61,7 +62,9 @@ const MyPokemonList: React.FunctionComponent<IMyPokemonListProps> = (props) => {
                     margin-top: 3rem;
                   `}
                 >
-                  <Button text="SEARCH POKEMON"></Button>
+                  <Link to={'/search'}>
+                    <Button text="SEARCH POKEMON"></Button>
+                  </Link>
                 </div>
               </div>
             ) : (
