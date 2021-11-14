@@ -17,13 +17,16 @@ export const detailPokemon = `
     gap: 1rem;
     flex-wrap: wrap;
   }
-`
-
-export const cardPokemon = `
-  background-color: #fefefe;
-  padding: 1.5rem 2rem;
-  border-radius: 2.5rem 2.5rem 0 0;
-  width: 100%;
+  & div.card{
+    background-color: #fefefe;
+    padding: 1.5rem 2rem;
+    border-radius: 2.5rem 2.5rem 0 0;
+    margin: 0 auto;
+    width: 100%;
+    @media (min-width: 640px) {
+      max-width: 640px;
+    }
+  }
 `
 export const wrapperImage = `
   width: 90%;

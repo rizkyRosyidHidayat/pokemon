@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 import * as React from "react";
 import Header from "./Header";
 import {
-  cardPokemon,
   detailPokemon,
   namePokemon,
   typePokemon,
@@ -79,11 +78,7 @@ const DetailPokemon: React.FunctionComponent<IDetailPokemonProps> = (props) => {
             ></Image>
           </div>
           {/* detail */}
-          <div
-            css={css`
-              ${cardPokemon}
-            `}
-          >
+          <div className="card">
             <div className="wrapper-card">
               {/* owned */}
               <LabelOwned name={detail_pokemon.name}></LabelOwned>
