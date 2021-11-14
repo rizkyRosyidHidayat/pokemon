@@ -38,19 +38,21 @@ const ListPokemon: React.FunctionComponent<IListPokemonProps> = (props) => {
           const pokemon = res[0].data;
           const color = res[1].data.color.name;
 
-          if (status === -1 && isMounted.current) {
-            setSelectedPokemon({
-              name: pokemon.name,
-              sprite: pokemon.sprites.other.dream_world.front_default,
-              types: pokemon.types.map(
-                (data: { type: { name: string } }) => data.type.name
-              ),
-            });
-            setColor(color === "white" ? "#b5b5b5" : color);
-
-            setLoading(false);
-          } else {
-            setLoading(false);
+          if (isMounted.current) {
+            if (status === -1) {
+              setSelectedPokemon({
+                name: pokemon.name,
+                sprite: pokemon.sprites.other.dream_world.front_default,
+                types: pokemon.types.map(
+                  (data: { type: { name: string } }) => data.type.name
+                ),
+              });
+              setColor(color === "white" ? "#b5b5b5" : color);
+  
+              setLoading(false);
+            } else {
+              setLoading(false);
+            }
           }
         })
       )
